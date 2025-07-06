@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: taxi_trips_tdc
+    database: bigquery-public-data
+    schema: chicago_taxi_trips
+    tables:
+      - name: taxi_trips      # actual table name in the warehouse
+        description: "Raw taxi trips data"

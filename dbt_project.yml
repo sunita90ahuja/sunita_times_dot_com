@@ -34,9 +34,3 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: table
-
-seeds:
-  my_dbt_project:
-    my_seed:
-      header: true
-      delimiter: ","
