@@ -38,5 +38,5 @@ unique_key
  from 
 {{ source('taxi_trips_tdc', 'taxi_trips') }}
 {% if is_incremental() %}
-WHERE date(trip_start_timestamp) > current_date - 2 -- or we can tax max of trip start date -2
+WHERE date(trip_start_timestamp) > current_date - 2 -- or we can take max of trip start date -2
  {% endif %}
