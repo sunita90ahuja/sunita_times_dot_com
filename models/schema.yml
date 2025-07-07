@@ -5,5 +5,12 @@ sources:
     database: bigquery-public-data
     schema: chicago_taxi_trips
     tables:
-      - name: taxi_trips      # actual table name in the warehouse
+      - name: taxi_trips     
         description: "Raw taxi trips data"
+      
+  - name: us_holiday_tdc
+    database: macro-crane-464804-d0
+    schema: dbt_times_dot_com
+    tables:
+      - name: us_holiday     
+        description: "US holidays from Kaggle dataset "
