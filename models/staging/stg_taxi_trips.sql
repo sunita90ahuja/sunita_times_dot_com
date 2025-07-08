@@ -38,6 +38,7 @@ unique_key
 ,ST_GEOGPOINT(pickup_longitude, pickup_latitude) as pickup_geopoint
 ,ST_GEOGPOINT(dropoff_longitude, dropoff_latitude) as dropoff_geopoint
 ,case when date(h.date) is not null then 'Holidays' else 'Working Days' end as holiday_flag
+,round(SAFE_DIVIDE(trip_miles,trip_total),2) as fare_per_mile
  from 
 {{ source('taxi_trips_tdc', 'taxi_trips') }} t
 left join {{ source('us_holiday_tdc', 'us_holiday') }} h
