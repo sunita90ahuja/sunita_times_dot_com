@@ -2,7 +2,12 @@
     materialized='view'
 ) }}
 
-
+-- Assumptions 
+-- For Multi day Trips, my assumption that drivers are taking rest from 10 PM to 6 AM
+-- For Multi day Trips, my assumption that trip starting before 10 PM on start date rests at 10 PM
+-- else trip duration will be counted till 12 midnight for that day
+-- For Multi day Trips, my assumption that trip ending after 6 PM on end date rests till 6 AM
+-- else trip duration will be counted till that time for that day
 with main as 
 (Select 
 taxi_id
