@@ -12,9 +12,9 @@
 Select 
 unique_key
 ,taxi_id
-,trip_start_timestamp
-,date(trip_start_timestamp) as trip_start_date
-,coalesce(TIMESTAMP_ADD(trip_start_timestamp, INTERVAL (trip_seconds) SECOND),(trip_end_timestamp))as exact_trip_end_timestamp
+, TIMESTAMP(DATETIME(trip_start_timestamp, "America/Chicago")) as trip_start_timestamp
+,date(TIMESTAMP(DATETIME(trip_start_timestamp, "America/Chicago"))) as trip_start_date
+,coalesce(TIMESTAMP_ADD(TIMESTAMP(DATETIME(trip_start_timestamp, "America/Chicago")), INTERVAL (trip_seconds) SECOND),TIMESTAMP(DATETIME(trip_end_timestamp, "America/Chicago")))as exact_trip_end_timestamp
 ,coalesce(trip_seconds,TIMESTAMP_DIFF(trip_end_timestamp, trip_start_timestamp, SECOND)) as total_trip_seconds
 ,ifnull(trip_miles,0.0) as trip_miles
 ,pickup_census_tract
@@ -42,9 +42,9 @@ unique_key
  from 
 {{ source('taxi_trips_tdc', 'taxi_trips') }} t
 left join {{ source('us_holiday_tdc', 'us_holiday') }} h
-on date(h.date) = date(t.trip_start_timestamp)
+on date(h.date) = date(TIMESTAMP(DATETIME(trip_start_timestamp, "America/Chicago")))
 and h.type like '%National holiday%'
 {% if is_incremental() %}
-WHERE date(trip_start_timestamp) >= current_date - 2 -- or we can take max of trip start date -2
+WHERE date(trip_start_timestamp) > current_date - 2 -- or we can take max of trip start date -2
  {% endif %}
  -- Taking data from Year 2020 to 2023 as 2023 is the latest Year in the dataset
