@@ -22,5 +22,5 @@ extract(year from trip_start_date) as trip_start_date_year
 ,round(avg(trip_total),2) avg_trip_total
 ,round(SAFE_DIVIDE(sum(trip_miles),sum(trip_total)),2) as fare_per_mile
 from 
-{{ ref('stg_taxi_trips') }} t
+{{ source('staging_taxi_trips_tdc', 'stg_taxi_trips') }} 
 group by 1,2 order by 1 desc,3 desc

@@ -14,3 +14,10 @@ sources:
     tables:
       - name: us_holiday     
         description: "US holidays from Kaggle dataset "
+
+  - name: staging_taxi_trips_tdc
+    database: macro-crane-464804-d0
+    schema: dbt_times_dot_com
+    tables:
+      - name: stg_taxi_trips  
+        description: "Staging Dataset "
