@@ -45,6 +45,6 @@ left join {{ source('us_holiday_tdc', 'us_holiday') }} h
 on date(h.date) = date(t.trip_start_timestamp)
 and h.type like '%National holiday%'
 {% if is_incremental() %}
-WHERE date(trip_start_timestamp) > current_date - 2 -- or we can take max of trip start date -2
+WHERE date(trip_start_timestamp) >= 'current_date - 2' -- or we can take max of trip start date -2
  {% endif %}
  -- Taking data from Year 2020 to 2023 as 2023 is the latest Year in the dataset
