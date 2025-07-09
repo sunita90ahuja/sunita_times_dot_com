@@ -139,4 +139,6 @@ Other Insights added to Looker -
 
 Looker link - https://lookerstudio.google.com/u/0/reporting/1488efbd-0690-41db-a5f0-0d28f9ae2cb4/page/oDWQF
 
+Converted UTC timing to Chicago zone
+
 
